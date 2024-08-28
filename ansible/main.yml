@@ -1,0 +1,11 @@
+---
+  - name: Setup init
+    import_playbook: ./playbooks/init.yml
+  - name: Setup firewall
+    import_playbook: ./playbooks/firewall.yml
+  - name: Setup docker
+    import_playbook: ./playbooks/docker.yml
+  - name: Upload files
+    import_playbook: ./playbooks/upload_files.yml
+  - name: Run
+    import_playbook: ./playbooks/run.yml

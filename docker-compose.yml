@@ -1,0 +1,31 @@
+services:
+  ansible:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ansible
+    env_file: .env
+    volumes:
+    - ansible:/root/ansible
+    - scripts:/root/scripts
+    - website:/root/website
+
+volumes:
+  ansible:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: './ansible'
+  scripts:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: './scripts'
+  website:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: './website'

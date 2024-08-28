@@ -1,0 +1,5 @@
+repos:
+  - repo: https://github.com/gitleaks/gitleaks #repo of the hook
+    rev: v8.18.4 #tag on the target repo
+    hooks:
+      - id: gitleaks #name of the hook to add

@@ -1,0 +1,12 @@
+- name: clean cloud1
+  hosts: cloud1
+  become: true
+  vars:
+    created_username: cloud1
+  tasks:
+    - name: Run make clean
+      become: true
+      become_user: "{{ created_username }}"
+      command: make clean
+      args:
+        chdir: "/home/{{ created_username }}/website"

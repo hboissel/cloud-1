@@ -1,0 +1,53 @@
+---
+- name: Init setup
+  hosts: cloud1
+  become: true
+  vars:
+    created_username: cloud1
+  tasks:
+    - name: Setup passwordless sudo
+      lineinfile:
+        path: /etc/sudoers
+        state: present
+        regexp: '^%sudo'
+        line: '%sudo ALL=(ALL) NOPASSWD: ALL'
+        validate: '/usr/sbin/visudo -cf %s'
+
+    - name: Create a new regular user with sudo privileges
+      user:
+        name: "{{ created_username }}"
+        state: present
+        groups: sudo
+        append: true
+        create_home: true
+
+     # Update and install the base software
+    - name: Update apt package cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: Ensure that a base set of software packages are installed
+      apt:
+        name:
+          - ufw
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+          - python3-pip
+          - virtualenv
+          - python3-setuptools
+        state: latest
+        update_cache: true
+        lock_timeout: 120
+
+    - name: Remove old packages from the cache
+      apt:
+        autoclean: yes
+
+    - name: Remove dependencies that are no longer needed
+      apt:
+        autoremove: yes
+        purge: yes
+

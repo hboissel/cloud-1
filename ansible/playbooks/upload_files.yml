@@ -1,0 +1,30 @@
+---
+- name: Upload website files
+  hosts: cloud1
+  become: true
+  vars:
+    created_username: cloud1
+  tasks:
+    - name: Copy directory to remote host
+      copy:
+        src: "/root/website"
+        dest: "/home/{{ created_username }}"
+        mode: '0755'
+        owner: "{{ created_username }}"
+        group: "{{ created_username }}"
+
+    - name: Add data directory
+      file:
+        path: "/home/{{ created_username }}/data/wordpress"
+        state: directory
+        mode: '0755'
+        owner: "{{ created_username }}"
+        group: "{{ created_username }}"
+
+    - name: Add data directory
+      file:
+        path: "/home/{{ created_username }}/data/mariadb"
+        state: directory
+        mode: '0755'
+        owner: "{{ created_username }}"
+        group: "{{ created_username }}"

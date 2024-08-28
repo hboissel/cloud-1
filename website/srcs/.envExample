@@ -1,0 +1,15 @@
+DOMAIN_NAME="example.com"
+
+SQL_DATABASE=cloud1
+SQL_USER=cloud1User
+SQL_PASSWORD=cloud1
+SQL_ROOT_PASSWORD=cloud1root
+
+SITE_TITLE=cloud1
+ADMIN_USER=boss
+ADMIN_PASSWORD=cloud1
+ADMIN_EMAIL=admin@mail.fr
+
+USER1_LOGIN=Elodie
+USER1_PASS=cloud1
+USER1_MAIL=elodie@mail.fr

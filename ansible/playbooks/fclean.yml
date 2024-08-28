@@ -1,0 +1,11 @@
+- name: fclean cloud1
+  hosts: cloud1
+  become: true
+  vars:
+    created_username: cloud1
+  tasks:
+    - name: Run make fclean
+      become: true
+      command: make fclean
+      args:
+        chdir: "/home/{{ created_username }}/website"

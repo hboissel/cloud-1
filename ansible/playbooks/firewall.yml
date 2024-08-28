@@ -1,0 +1,26 @@
+---
+- name: Setup firewall
+  hosts: cloud1
+  become: true
+  tasks:
+    - name: Allow ssh port 22.
+      ufw:
+        rule: allow
+        proto: tcp
+        port: '22'
+        state: enabled
+
+    - name: Allow http port 80.
+      ufw:
+        rule: allow
+        proto: tcp
+        port: '80'
+        state: enabled
+
+    - name: Allow https port 443.
+      ufw:
+        rule: allow
+        proto: tcp
+        port: '443'
+        state: enabled
+
