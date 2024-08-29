@@ -88,7 +88,8 @@ def create_droplet(name, ssh_key_fingerprint):
     data = {
         "name": name,
         "region": "fra1",
-        "size": "s-1vcpu-512mb-10gb",
+        # "size": "s-1vcpu-512mb-10gb",
+        "size": "s-4vcpu-8gb-amd",
         "image": "ubuntu-20-04-x64",
         "ssh_keys": [ssh_key_fingerprint],
         "tags": [TAG_NAME],

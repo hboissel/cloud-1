@@ -1,9 +1,10 @@
-FROM alpine:edge@sha256:b93f4f6834d5c6849d859a4c07cc88f5a7d8ce5fb8d2e72940d8edd8be343c04
+FROM debian:bullseye-slim@sha256:9058862a1be84689bd13292549ba981364f85ff99e50a612f94b188ac69db137
 
 LABEL org.opencontainers.image.source=https://github.com/hboissel/cloud-1
 
-RUN apk update \
- && apk add --no-cache nginx
+RUN apt-get update -y \
+    && apt-get upgrade -y \
+    && apt-get install nginx -y
  
 COPY conf/nginx.conf /etc/nginx/nginx.conf
 
