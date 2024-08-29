@@ -1,5 +1,7 @@
 #!/bin/sh
 
+chown -R mysql:mysql /var/lib/mysql
+
 /etc/init.d/mariadb start
 
 echo "test $SQL_DATABASE"

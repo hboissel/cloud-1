@@ -10,11 +10,11 @@
         port: '22'
         state: enabled
 
-    - name: Allow http port 80.
+    - name: Allow http port 8080.
       ufw:
         rule: allow
         proto: tcp
-        port: '80'
+        port: '8080'
         state: enabled
 
     - name: Allow https port 443.

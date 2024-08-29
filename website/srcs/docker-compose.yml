@@ -10,7 +10,7 @@ services:
       context: requirements/mariadb
       dockerfile: Dockerfile
     env_file: .env
-    restart: on-failure
+    restart: unless-stopped
     expose:
       - 3306
     healthcheck:
@@ -34,13 +34,9 @@ services:
     env_file: .env
     ports:
       - 443:443
-      - 80:80
-    expose: 
-      - 443
-      - 80
-    restart: on-failure
+    restart: unless-stopped
     healthcheck:
-      test: 'curl -kfsSL https://localhost:443/status;curl -kfsSL https://localhost:80/status'
+      test: 'curl -kfsSL https://localhost:443/status'
       interval: 5s
       timeout: 1s
       retries: 10
@@ -60,9 +56,27 @@ services:
     depends_on:
       mariadb:
         condition: service_healthy
-    restart: on-failure
+    restart: unless-stopped
     expose: 
       - 9000
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin
+    build: 
+      context: requirements/phpmyadmin
+      dockerfile: Dockerfile
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mariadb
+      - PMA_PORT=3306
+    networks:
+      - inception
+    depends_on:
+      - mariadb
+    restart: unless-stopped
+    ports:
+      - 8080:443
 
 volumes:
   wordpress:

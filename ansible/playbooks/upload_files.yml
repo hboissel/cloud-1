@@ -5,15 +5,22 @@
   vars:
     created_username: cloud1
   tasks:
-    - name: Copy directory to remote host
-      copy:
+    - name: Synchronize and delete files for Website
+      ansible.posix.synchronize:
         src: "/root/website"
         dest: "/home/{{ created_username }}"
+        delete: true
+        recursive: true
+
+    - name: Change permissions of /home/{{ created_username }}/website
+      file:
+        path: "/home/{{ created_username }}/website"
+        state: directory
         mode: '0755'
         owner: "{{ created_username }}"
         group: "{{ created_username }}"
 
-    - name: Add data directory
+    - name: Add data directory data wordpress
       file:
         path: "/home/{{ created_username }}/data/wordpress"
         state: directory
@@ -21,7 +28,7 @@
         owner: "{{ created_username }}"
         group: "{{ created_username }}"
 
-    - name: Add data directory
+    - name: Add data directory data mariadb
       file:
         path: "/home/{{ created_username }}/data/mariadb"
         state: directory

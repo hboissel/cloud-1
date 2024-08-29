@@ -5,7 +5,8 @@ RUN apk add --no-cache \
     openssh-client \
     curl \
     jq \
-    tmux
+    tmux \
+    rsync
 
 RUN pip install --no-cache-dir --upgrade ansible==10.3.0 requests==2.32.3 python-dotenv==1.0.1
 
