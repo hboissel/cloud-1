@@ -19,7 +19,6 @@
       apt:
         name: docker-ce
         state: latest
-        update_cache: true
 
     - name: Add user to Docker group
       user:
