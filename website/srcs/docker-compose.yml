@@ -1,14 +1,15 @@
 services:
   mariadb:
-    image: mariadb
+    image: ghcr.io/hboissel/mariadb:latest@sha256:ba0ba30c935af3ce29491be05b889fab2fd5d6445acbc488ed6b4b7c09e79633
+    # image: mariadb
     container_name: mariadb
     volumes: 
       - mariadb:/var/lib/mysql
     networks:
       - inception
-    build: 
-      context: requirements/mariadb
-      dockerfile: Dockerfile
+    # build: 
+    #   context: requirements/mariadb
+    #   dockerfile: Dockerfile
     env_file: .env
     restart: unless-stopped
     expose:
@@ -43,16 +44,17 @@ services:
       start_period: 5s
 
   wordpress:
-    image: wordpress
+    image: ghcr.io/hboissel/wordpress:latest@sha256:8fcbbe33e5a4d5e32282bcbbea966d3b4551540a1aff39da0c7bbf140244fc4f
+    # image: wordpress
     container_name: wordpress
     env_file: .env
     volumes:
     - wordpress:/var/www/wordpress
     networks:
       - inception
-    build: 
-      context: requirements/wordpress
-      dockerfile: Dockerfile
+    # build: 
+    #   context: requirements/wordpress
+    #   dockerfile: Dockerfile
     depends_on:
       mariadb:
         condition: service_healthy
