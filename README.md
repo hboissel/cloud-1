@@ -1,24 +1,6 @@
 
 # ☁️ Cloud-1
 
-## 📑 Table of Contents
-
-- [📘 Introduction](#introduction)
-- [🚀 Features](#features)
-- [⚙️ Prerequisites](#prerequisites)
-- [🔧 Installation](#installation)
-  - [1️⃣ Clone the Repository](#1-clone-the-repository)
-  - [2️⃣ Set Up Environment Variables](#2-set-up-environment-variables)
-  - [3️⃣ Generate SSH Keys](#3-generate-ssh-keys)
-  - [4️⃣ Build the Ansible Docker Container](#4-build-the-ansible-docker-container)
-- [🛠️ Usage](#usage)
-  - [1️⃣ Access the Ansible Container](#1-access-the-ansible-container)
-  - [2️⃣ Create Droplets on DigitalOcean](#2-create-droplets-on-digitalocean)
-  - [3️⃣ Deploy the Infrastructure with Ansible](#3-deploy-the-infrastructure-with-ansible)
-  - [4️⃣ Destroy All Droplets](#4-destroy-all-droplets)
-- [📂 Project Structure](#project-structure)
-- [🙌 Acknowledgements](#acknowledgements)
-
 ## 📘 Introduction
 
 **Cloud-1** is an automated deployment project for a fully containerized web infrastructure. It leverages **DigitalOcean**, **Docker**, **Ansible**, and **Python** to seamlessly provision and configure servers that run a **WordPress** website backed by **MariaDB**, served through **Nginx**, and managed with **phpMyAdmin**.
