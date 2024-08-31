@@ -1,86 +1,85 @@
-# Cloud-1
 
-## Table of Contents
+# ☁️ Cloud-1
 
-- [Introduction](#introduction)
-- [Features](#features)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-  - [1. Clone the Repository](#1-clone-the-repository)
-  - [2. Set Up Environment Variables](#2-set-up-environment-variables)
-  - [3. Generate SSH Keys](#3-generate-ssh-keys)
-  - [4. Build the Ansible Docker Container](#4-build-the-ansible-docker-container)
-- [Usage](#usage)
-  - [1. Access the Ansible Container](#1-access-the-ansible-container)
-  - [2. Create Droplets on DigitalOcean](#2-create-droplets-on-digitalocean)
-  - [3. Deploy the Infrastructure with Ansible](#3-deploy-the-infrastructure-with-ansible)
-  - [4. Destroy All Droplets](#4-destroy-all-droplets)
-- [Project Structure](#project-structure)
-- [Contributing](#contributing)
-- [License](#license)
-- [Acknowledgements](#acknowledgements)
+## 📑 Table of Contents
 
-## Introduction
+- [📘 Introduction](#introduction)
+- [🚀 Features](#features)
+- [⚙️ Prerequisites](#prerequisites)
+- [🔧 Installation](#installation)
+  - [1️⃣ Clone the Repository](#1-clone-the-repository)
+  - [2️⃣ Set Up Environment Variables](#2-set-up-environment-variables)
+  - [3️⃣ Generate SSH Keys](#3-generate-ssh-keys)
+  - [4️⃣ Build the Ansible Docker Container](#4-build-the-ansible-docker-container)
+- [🛠️ Usage](#usage)
+  - [1️⃣ Access the Ansible Container](#1-access-the-ansible-container)
+  - [2️⃣ Create Droplets on DigitalOcean](#2-create-droplets-on-digitalocean)
+  - [3️⃣ Deploy the Infrastructure with Ansible](#3-deploy-the-infrastructure-with-ansible)
+  - [4️⃣ Destroy All Droplets](#4-destroy-all-droplets)
+- [📂 Project Structure](#project-structure)
+- [🙌 Acknowledgements](#acknowledgements)
+
+## 📘 Introduction
 
 **Cloud-1** is an automated deployment project for a fully containerized web infrastructure. It leverages **DigitalOcean**, **Docker**, **Ansible**, and **Python** to seamlessly provision and configure servers that run a **WordPress** website backed by **MariaDB**, served through **Nginx**, and managed with **phpMyAdmin**.
 
 This project aims to simplify the process of setting up scalable and secure web applications by automating each step, from server provisioning to application deployment.
 
-## Features
+## 🚀 Features
 
-- **Automated Server Provisioning**: Utilize a Python script to interact with the DigitalOcean API for creating and managing droplets.
-- **Secure SSH Management**: Automatically register and manage SSH keys for secure server access.
-- **Infrastructure as Code**: Use Ansible playbooks to configure servers, set up firewalls, and deploy Docker containers.
-- **Containerized Services**:
-  - **WordPress**: Easily deploy and manage your WordPress site.
-  - **MariaDB**: Reliable and high-performance database backend.
-  - **Nginx**: Efficient web server and reverse proxy.
-  - **phpMyAdmin**: Web interface for managing your databases.
-- **SSL Encryption**: Integrate SSL certificates for secure HTTPS connections.
-- **Scalability**: Easily add or remove servers and services as needed.
-- **Modular Design**: Customize and extend each component to fit specific needs.
+- **🔧 Automated Server Provisioning**: Utilize a Python script to interact with the DigitalOcean API for creating and managing droplets.
+- **🔐 Secure SSH Management**: Automatically register and manage SSH keys for secure server access.
+- **📜 Infrastructure as Code**: Use Ansible playbooks to configure servers, set up firewalls, and deploy Docker containers.
+- **📦 Containerized Services**:
+  - **📝 WordPress**: Easily deploy and manage your WordPress site.
+  - **💾 MariaDB**: Reliable and high-performance database backend.
+  - **🌐 Nginx**: Efficient web server and reverse proxy.
+  - **🗄️ phpMyAdmin**: Web interface for managing your databases.
+- **🔒 SSL Encryption**: Integrate SSL certificates for secure HTTPS connections.
+- **📈 Scalability**: Easily add or remove servers and services as needed.
+- **🔄 Modular Design**: Customize and extend each component to fit specific needs.
 
-## Prerequisites
+## ⚙️ Prerequisites
 
 Before getting started, ensure you have the following installed on your local machine:
 
-- **Docker**: [Installation Guide](https://docs.docker.com/get-docker/)
-- **Docker Compose**: [Installation Guide](https://docs.docker.com/compose/install/)
-- **Python 3.x**: [Installation Guide](https://www.python.org/downloads/)
-- **Make**: Typically pre-installed on Unix systems. For Windows, consider using [Make for Windows](http://gnuwin32.sourceforge.net/packages/make.htm).
-- **DigitalOcean Account**: [Sign Up](https://cloud.digitalocean.com/registrations/new)
+- **🐳 Docker**: [Installation Guide](https://docs.docker.com/get-docker/)
+- **🧩 Docker Compose**: [Installation Guide](https://docs.docker.com/compose/install/)
+- **🐍 Python 3.x**: [Installation Guide](https://www.python.org/downloads/)
+- **🔨 Make**: Typically pre-installed on Unix systems. For Windows, consider using [Make for Windows](http://gnuwin32.sourceforge.net/packages/make.htm).
+- **☁️ DigitalOcean Account**: [Sign Up](https://cloud.digitalocean.com/registrations/new)
 
-## Installation
+## 🔧 Installation
 
 Follow these steps to set up and deploy the Cloud-1 project.
 
-### 1. Clone the Repository
+### 1️⃣ Clone the Repository
 
 ```bash
 git clone https://github.com/hboissel/cloud-1.git
 cd cloud-1
 ```
 
-### 2. Set Up Environment Variables
+### 2️⃣ Set Up Environment Variables
 
 #### a. Create `.env` Files
 
 Create `.env` files:
-- in the root directory to store API key for Digital Ocean
-- in the website/srcs directory for the configuration of mariadb and wordpress accounts
+- in the root directory to store API key for DigitalOcean
+- in the website/srcs directory for the configuration of MariaDB and WordPress accounts
 
-You have examples with the files .envExamples
+You have examples with the files `.envExamples`.
 
 #### c. Obtain SSL Certificates
 
 You can obtain SSL certificates using [Let's Encrypt](https://letsencrypt.org/).
 
-Add yours in website/srcs/requirements/nginx/conf and website/srcs/requirements/phpmyadmin/cert
+Add yours in `website/srcs/requirements/nginx/conf` and `website/srcs/requirements/phpmyadmin/cert`.
 
-For nginx you need **fullchain.pem** and **privkey.pem**.
-For phpmyadmin you need the same as for nginx plus **cert.pem**
+For Nginx you need **fullchain.pem** and **privkey.pem**.
+For phpMyAdmin you need the same as for Nginx plus **cert.pem**.
 
-### 3. Generate SSH Keys
+### 3️⃣ Generate SSH Keys
 
 Generate an SSH key pair that will be used for accessing the DigitalOcean droplets.
 
@@ -90,7 +89,7 @@ ssh-keygen -f .ssh/id_ed25519 -t ed25519 -N ""
 ```
 This command creates a new SSH key pair without a passphrase.
 
-### 4. Build the Ansible Docker Container
+### 4️⃣ Build the Ansible Docker Container
 
 We use Docker to containerize our Ansible setup for consistent and reproducible deployments.
 
@@ -110,9 +109,9 @@ docker images
 ```
 You should see an image corresponding to your Ansible setup.
 
-## Usage
+## 🛠️ Usage
 
-### 1. Access the Ansible Container
+### 1️⃣ Access the Ansible Container
 
 Enter the Ansible Docker container to perform deployment operations.
 
@@ -122,7 +121,7 @@ make ansible
 
 This command will start a Docker container and drop you into a shell session inside it.
 
-### 2. Create Droplets on DigitalOcean
+### 2️⃣ Create Droplets on DigitalOcean
 
 Within the Ansible container, run the Python script to create new droplets.
 
@@ -180,7 +179,7 @@ web-server-1 | SUCCESS => {
 }
 ```
 
-### 3. Deploy the Infrastructure with Ansible
+### 3️⃣ Deploy the Infrastructure with Ansible
 
 Run the Ansible playbook to configure the servers and deploy the Dockerized infrastructure.
 
@@ -229,10 +228,10 @@ PLAY RECAP ********************************************************************
 
 Once deployment is complete, your services should be up and running.
 
-- **WordPress**: `https://yourdomain.com`
-- **phpMyAdmin**: `https://yourdomain.com:8080`
+- **📝 WordPress**: `https://yourdomain.com`
+- **🗄️ phpMyAdmin**: `https://yourdomain.com:8080`
 
-### 4. Destroy All Droplets
+### 4️⃣ Destroy All Droplets
 
 When you need to tear down your infrastructure, use the following command within the Ansible container:
 
@@ -252,7 +251,9 @@ manage_droplets -d
 💾 IPs saved to /root/ansible/hosts
 ```
 
-## Project Structure
+##
+
+ 📂 Project Structure
 
 ```
 cloud-1/
@@ -278,10 +279,11 @@ cloud-1/
 └── README.md
 ```
 
-## Acknowledgements
+## 🙌 Acknowledgements
 
 - [DigitalOcean](https://www.digitalocean.com/) for their robust and developer-friendly cloud services.
 - [Docker](https://www.docker.com/) for simplifying containerization.
 - [Ansible](https://www.ansible.com/) for powerful automation capabilities.
 - [Let's Encrypt](https://letsencrypt.org/) for providing free SSL certificates.
 - [Certbot](https://certbot.eff.org/) for automating the certificate issuance process.
+  
